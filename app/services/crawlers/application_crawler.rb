@@ -1,9 +1,17 @@
 module Crawlers
   class ApplicationCrawler
-    extend Concerns::Timeoutable
+    class << self
+      def before(method, options)
+        old_method = instance_method(method)
+        define_method(method) do
+          send(options[:call])
+          old_method.bind(self).call
+        end
+      end
 
-    def self.crawl(path = '/')
-      new(path).crawl
+      def crawl(path = '/')
+        new(path).crawl
+      end
     end
 
     def initialize(path = '/')

@@ -5,7 +5,6 @@
 module Pathe
   class Schedule
     class << self
-
       def today
         Time.zone.today
       end
