@@ -1,5 +1,5 @@
-module Crawler
-  module BaseCrawler
+module Crawlers
+  class ApplicationCrawler
     attr_reader :path
 
     def initialize(path = '/')
@@ -21,12 +21,24 @@ module Crawler
     end
 
     def find(selector, attribute = nil)
-      selection = css(selector)
+      elements = css(selector)
 
       if attribute.present?
-        selection.first.attributes[attribute].text
+        elements.first.attributes[attribute].text
       else
-        selection.first.text
+        elements.first.text
+      end
+    end
+
+    def find_all(selector, attribute = nil)
+      elements = css(selector)
+
+      if attribute.present?
+        elements.map do |element|
+          element.attributes[attribute].text
+        end
+      else
+        elements.map(&:text)
       end
     end
   end
