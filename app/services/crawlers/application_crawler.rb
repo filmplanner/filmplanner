@@ -2,8 +2,6 @@ module Crawlers
   class ApplicationCrawler
     extend Concerns::Timeoutable
 
-    attr_reader :path
-
     def self.crawl(path = '/')
       new(path).crawl
     end
@@ -27,7 +25,7 @@ module Crawlers
     def request
       base_url = ENV.fetch('CRAWLER_BASE_URL')
 
-      HTTParty.get(base_url + path)
+      HTTParty.get(base_url + @path)
     end
 
     def page

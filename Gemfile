@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'vcr'
   gem 'factory_bot_rails'
+  gem 'timecop'
 end
 
 group :development do

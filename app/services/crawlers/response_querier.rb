@@ -4,10 +4,6 @@ module Crawlers
       @html = Nokogiri::HTML(response)
     end
 
-    def css(selector)
-      @html.css(selector)
-    end
-
     def find(selector, attribute = nil)
       elements = css(selector)
 
@@ -28,6 +24,12 @@ module Crawlers
       else
         elements.map(&:text)
       end
+    end
+
+    private
+
+    def css(selector)
+      @html.css(selector)
     end
   end
 end
