@@ -4,3 +4,8 @@
   - critical
   - default
   - low
+:schedule:
+  sync_theaters:
+    cron: '0 0 * * 0'
+    class: TheaterSynchronizeWorker
+    description: 'Synchronize all theaters of Pathe.nl to our own database'
