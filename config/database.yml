@@ -1,10 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
+  host: db
+  username: postgres
+  password:
   pool: 5
-  username: filmplanner_admin
-  password: welkom123
 
 development:
   <<: *default
