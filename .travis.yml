@@ -18,3 +18,5 @@ env:
 script:
   - docker exec filmplanner_web_1 bin/rake db:create db:migrate
   - docker exec filmplanner_web_1 bin/bundle exec rspec
+after_success:
+  - docker exec filmplanner_web_1 CI=true TRAVIS=true coveralls --verbose
