@@ -9,16 +9,20 @@ module Crawlers
         end
       end
 
-      def crawl(path = '/')
-        new(path).crawl
+      def crawl(options = {})
+        new(options).crawl
       end
     end
 
-    def initialize(path = '/')
-      @path = path
+    def initialize(options = {})
+      @options = options
     end
 
     def crawl
+      raise NotImplementedError
+    end
+
+    def path
       raise NotImplementedError
     end
 
@@ -33,11 +37,11 @@ module Crawlers
     def request
       base_url = ENV.fetch('CRAWLER_BASE_URL')
 
-      HTTParty.get(base_url + @path)
+      HTTParty.get(base_url + path)
     end
 
     def page
-      @page ||= ResponseQuerier.new(request)
+      @page ||= ResponseQuerier.for_response(request)
     end
   end
 end

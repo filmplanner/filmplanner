@@ -5,13 +5,15 @@ module Crawlers
     describe '#crawl' do
       subject(:crawler) { TheaterPathCrawler.new }
 
-      it 'returns the correct data' do
+      it 'returns the correct hash' do
         VCR.use_cassette 'crawlers/theater_path_response' do
           expect(crawler.crawl).to include(
-            '/bioscoop/amersfoort',
-            '/bioscoop/spuimarkt',
-            '/bioscoop/buitenhof',
-            '/bioscoop/scheveningen'
+            paths: include(
+              '/bioscoop/amersfoort',
+              '/bioscoop/spuimarkt',
+              '/bioscoop/buitenhof',
+              '/bioscoop/scheveningen'
+            )
           )
         end
       end

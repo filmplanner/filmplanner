@@ -3,9 +3,9 @@ require 'rails_helper'
 module Crawlers
   RSpec.describe TheaterCrawler do
     describe '#crawl' do
-      subject(:crawler) { TheaterCrawler.new('/bioscoop/amersfoort') }
+      subject(:crawler) { TheaterCrawler.new(path: '/bioscoop/amersfoort') }
 
-      it 'returns the correct data' do
+      it 'returns the correct hash' do
         VCR.use_cassette 'crawlers/theater_response' do
           expect(crawler.crawl).to eq(
             id: '23',

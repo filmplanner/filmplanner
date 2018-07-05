@@ -17,6 +17,12 @@ module Pathe
           end
         end
 
+        describe '.last_updated' do
+          it 'returns the correct date' do
+            expect(Schedule.last_updated).to eq Date.new(2018, 7, 2)
+          end
+        end
+
         describe '.remaining_days' do
           it 'returns the correct days' do
             expect(Schedule.remaining_days).to eq remaining_days
@@ -32,12 +38,6 @@ module Pathe
         describe '.update_end' do
           it 'returns the correct date' do
             expect(Schedule.update_end).to eq Date.new(2018, 7, 11)
-          end
-        end
-
-        describe '.last_updated' do
-          it 'returns the correct date' do
-            expect(Schedule.last_updated).to eq Date.new(2018, 7, 2)
           end
         end
       end

@@ -5,10 +5,10 @@ class TheaterSynchronizeWorker
   include Sidekiq::Worker
 
   def perform
-    theater_paths = Crawlers::TheaterPathCrawler.crawl
+    theater_path_hash = Crawlers::TheaterPathCrawler.crawl
 
-    theater_paths.each do |path|
-      theater_hash = Crawlers::TheaterCrawler.crawl(path)
+    theater_path_hash[:paths].each do |path|
+      theater_hash = Crawlers::TheaterCrawler.crawl(path: path)
 
       Parsers::TheaterParser.parse(theater_hash)
     end

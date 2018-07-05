@@ -9,13 +9,17 @@ module Parsers
     end
 
     def parse
-      theater.update(@hash)
+      theater if theater.update(attributes)
     end
 
     private
 
     def theater
       Theater.find_or_initialize_by(id: @hash[:id])
+    end
+
+    def attributes
+      @hash
     end
   end
 end
