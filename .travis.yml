@@ -17,4 +17,4 @@ env:
   - RAILS_ENV=test
 script:
   - docker exec filmplanner_web_1 bin/rake db:create db:migrate
-  - docker exec -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH" filmplanner_web_1 bin/bundle exec rspec
+  - docker exec -e CI=true TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH" filmplanner_web_1 bin/bundle exec rspec
