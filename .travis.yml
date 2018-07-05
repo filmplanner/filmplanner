@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+- docker
+
+before_script:
+- docker-compose build
+- docker exec -t -i filmplanner_web_1 /bin/bash
+- bundle exec rails db:test:prepare
+
+script:
+- bundle exec rake spec
