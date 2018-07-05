@@ -1,8 +1,9 @@
-udo: required
+sudo: required
 
 services:
   - docker
   - postgresql
+  - redis
 
 language: ruby
 
