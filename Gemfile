@@ -37,6 +37,7 @@ gem 'nokogiri'
 gem 'httparty'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem 'coveralls', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
