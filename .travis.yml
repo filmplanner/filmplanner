@@ -1,12 +1,19 @@
-sudo: required
+udo: required
 
 services:
-- docker
+  - docker
+  - postgresql
 
-before_script:
-- docker-compose build
-- docker exec -t -i filmplanner_web_1 /bin/bash
-- bundle exec rails db:test:prepare
+language: ruby
 
+rvm:
+  - 2.2.3
+
+before_install:
+  - docker-compose build
+  - docker-compose up -d
+env:
+  - RAILS_ENV=test
 script:
-- bundle exec rake spec
+  - docker exec filmplanner_web_1 bin/rake db:create db:migrate
+  - docker exec filmplanner_web_1 bin/bundle exec rspec
