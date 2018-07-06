@@ -1,25 +1,13 @@
 module Parsers
-  class TheaterParser
-    def self.parse(hash)
-      new(hash).parse
+  class TheaterParser < RecordParser
+    def klass
+      Theater
     end
 
-    def initialize(hash)
-      @hash = hash
-    end
-
-    def parse
-      theater if theater.update(attributes)
-    end
-
-    private
-
-    def theater
-      Theater.find_or_initialize_by(id: @hash[:id])
-    end
-
-    def attributes
-      @hash
+    def initialize_by
+      {
+        id: @hash[:id]
+      }
     end
   end
 end

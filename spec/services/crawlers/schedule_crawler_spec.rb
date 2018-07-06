@@ -23,8 +23,8 @@ module Crawlers
                     shows: include(
                       a_hash_including(
                         date:     date,
-                        start:    '16:30',
-                        end:      '18:53',
+                        start_at: '16:30',
+                        end_at:   '18:53',
                         version:  '3D',
                         url:      '/tickets/start/2635645'
                       )

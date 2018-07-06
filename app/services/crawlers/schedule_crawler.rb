@@ -50,8 +50,8 @@ module Crawlers
       shows.map do |show|
         {
           date:     @options[:date],
-          start:    show.find('.schedule-time__start'),
-          end:      show.find('.schedule-time__end'),
+          start_at: show.find('.schedule-time__start'),
+          end_at:   show.find('.schedule-time__end'),
           version:  show.find('.schedule-time__label'),
           url:      show.attribute('data-href')
         }

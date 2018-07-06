@@ -2,6 +2,14 @@ require 'rails_helper'
 
 module Parsers
   RSpec.describe TheaterParser do
+    describe '#klass' do
+      subject(:parser) { TheaterParser.new({}) }
+
+      it 'returns the correct class' do
+        expect(parser.klass).to eq Theater
+      end
+    end
+
     describe '#parse' do
       let(:hash) do
         {
@@ -9,7 +17,7 @@ module Parsers
           name: 'Pathé Amersfoort',
           city: 'Amersfoort',
           image: 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg',
-          path: '/bioscoop/amersfoort'
+          url: '/bioscoop/amersfoort'
         }
       end
       subject(:parser) { TheaterParser.new(hash) }
@@ -22,7 +30,7 @@ module Parsers
         expect(theater.name).to eq 'Pathé Amersfoort'
         expect(theater.city).to eq 'Amersfoort'
         expect(theater.image).to eq 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg'
-        expect(theater.path).to eq '/bioscoop/amersfoort'
+        expect(theater.url).to eq '/bioscoop/amersfoort'
       end
 
       context 'when record already exists' do
@@ -36,7 +44,7 @@ module Parsers
           expect(theater.name).to eq 'Pathé Amersfoort'
           expect(theater.city).to eq 'Amersfoort'
           expect(theater.image).to eq 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg'
-          expect(theater.path).to eq '/bioscoop/amersfoort'
+          expect(theater.url).to eq '/bioscoop/amersfoort'
         end
       end
     end

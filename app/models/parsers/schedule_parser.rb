@@ -16,7 +16,7 @@ module Parsers
           theater = Theater.find_by(name: theater_hash[:name])
 
           theater_hash[:shows].each do |show_hash|
-            Parsers::ShowParser.parse(show_hash, movie, theater)
+            Parsers::ShowParser.parse(show_hash, movie: movie, theater: theater)
           end
         end
       end

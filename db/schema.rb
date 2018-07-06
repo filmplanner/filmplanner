@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_05_223517) do
+ActiveRecord::Schema.define(version: 2018_07_06_174611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,16 +20,20 @@ ActiveRecord::Schema.define(version: 2018_07_05_223517) do
     t.string "description"
     t.string "image"
     t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shows", force: :cascade do |t|
     t.bigint "theater_id"
     t.bigint "movie_id"
     t.date "date"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.string "version"
     t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_shows_on_movie_id"
     t.index ["theater_id"], name: "index_shows_on_theater_id"
   end
@@ -38,7 +42,9 @@ ActiveRecord::Schema.define(version: 2018_07_05_223517) do
     t.string "name"
     t.string "city"
     t.string "image"
-    t.string "path"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

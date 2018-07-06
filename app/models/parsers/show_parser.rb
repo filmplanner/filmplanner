@@ -1,47 +1,38 @@
 module Parsers
-  class ShowParser
-    def self.parse(hash, movie, theater)
-      new(hash, movie, theater).parse
+  class ShowParser < RecordParser
+    def klass
+      Show
     end
 
-    def initialize(hash, movie, theater)
-      @hash     = hash
-      @movie    = movie
-      @theater  = theater
+    def start_at
+      datetime = DateTimeParser.parse(@hash[:date], @hash[:start_at])
+      return datetime if datetime > @hash[:date] + 8.hours
+
+      datetime + 1.day
     end
 
-    def parse
-      show if show.update(attributes)
+    def end_at
+      datetime = DateTimeParser.parse(@hash[:date], @hash[:end_at])
+      return datetime if datetime > start_at
+
+      datetime + 1.day
     end
 
-    private
-
-    def show
-      Show.find_or_initialize_by(
-        movie:    @movie,
-        theater:  @theater,
+    def initialize_by
+      {
+        movie:    @options[:movie],
+        theater:  @options[:theater],
         date:     @hash[:date],
-        start:    start_datetime,
-        end:      end_datetime
-      )
+        start_at: start_at,
+        end_at:   end_at
+      }
     end
 
     def attributes
-      @hash.select { |key, _| Show.column_names.include?(key.to_s) }
-    end
-
-    def start_datetime
-      date_with_time(@hash[:date], @hash[:start])
-    end
-
-    def end_datetime
-      end_datetime = date_with_time(@hash[:date], @hash[:end])
-
-      end_datetime < start_datetime ? end_datetime + 1.day : end_datetime
-    end
-
-    def date_with_time(date, time)
-      date.to_datetime + Time.zone.parse(time).seconds_since_midnight.seconds
+      {
+        version:  @hash[:version],
+        url:      @hash[:url]
+      }
     end
   end
 end

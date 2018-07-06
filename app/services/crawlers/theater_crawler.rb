@@ -10,7 +10,7 @@ module Crawlers
         name:   page.find('.visual-cinema__location', 'data-name'),
         city:   page.find('.visual-cinema__location', 'data-city'),
         image:  page.find('.visual-fullpage__slide img', 'src'),
-        path:   path
+        url:    path
       }
     end
 
