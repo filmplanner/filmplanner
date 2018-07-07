@@ -2,7 +2,7 @@ module Filmplanner
   class Combination
     MAX_MOVIE_AMOUNT = 5
 
-    # Filmplanner::Combination.combine(date: Time.zone.tomorrow, theater_ids: 13, movie_ids: [22416, 21381, 21743, 22869])
+    # Filmplanner::Combination.combine(date: Time.zone.tomorrow, theater_ids: [13, 5], movie_ids: [22416, 21381, 21743])
     class << self
       def combine(date:, theater_ids:, movie_ids: [])
         new(date, theater_ids, movie_ids).combine
@@ -31,7 +31,7 @@ module Filmplanner
     def combine_possible_movies(movie_ids, possible_movie_ids)
       return [] if movie_ids.length >= 5
 
-      possible_movie_ids.inject([]) do |combined_movie_ids, movie_id|
+      (possible_movie_ids - movie_ids).inject([]) do |combined_movie_ids, movie_id|
         combined_movie_ids << movie_ids + [movie_id]
       end
     end
