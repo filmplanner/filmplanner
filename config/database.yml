@@ -4,7 +4,8 @@ default: &default
   host: db
   username: postgres
   password:
-  pool: 5
+  pool: 40
+  timeout: 5000
 
 development:
   <<: *default

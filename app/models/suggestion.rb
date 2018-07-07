@@ -3,11 +3,8 @@ class Suggestion < ApplicationRecord
     def for_shows(shows)
       shows = [shows].flatten
 
-      suggestion = Suggestion.find_or_initialize_by(
-        key: SuggestionKey.join(shows.map(&:full_key))
-      )
-
-      suggestion.update(
+      {
+        key:              SuggestionKey.join(shows.map(&:full_key)),
         show_key:         SuggestionKey.join(shows.map(&:to_key)),
         movie_key:        SuggestionKey.join(shows.map(&:movie_key)),
         theater_key:      SuggestionKey.join(shows.map(&:theater_key)),
@@ -17,8 +14,7 @@ class Suggestion < ApplicationRecord
         wait_time:        Show.wait_time_for(shows),
         shows_amount:     shows.length,
         theaters_amount:  shows.map(&:theater_id).uniq.length
-      )
-      suggestion
+      }
     end
   end
 

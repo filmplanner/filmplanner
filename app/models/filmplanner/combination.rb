@@ -19,13 +19,15 @@ module Filmplanner
     end
 
     def combine
-      movie_combinations.each do |movie_ids|
-        show_combinations = show_combinations(movie_ids)
+      Suggestion.bulk_insert(set_size: 10000) do |worker|
+        movie_combinations.each do |movie_ids|
+          show_combinations = show_combinations(movie_ids)
 
-        show_combinations.each do |shows|
-          next unless Show.attainable?(shows)
+          show_combinations.each do |shows|
+            next unless Show.attainable?(shows)
 
-          Suggestion.for_shows(shows)
+            worker.add(Suggestion.for_shows(shows))
+          end
         end
       end
     end
