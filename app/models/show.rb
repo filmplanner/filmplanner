@@ -13,7 +13,7 @@ class Show < ApplicationRecord
 
     def attainable?(shows)
       shows.sort_by(&:start_at).each_cons(2).none? do |show, other|
-        !show.ends_before?(other) || show.wait_time(other) > 45.minutes
+        !show.ends_before?(other) || show.wait_time(other) > (shows.length * 30.minutes)
       end
     end
   end

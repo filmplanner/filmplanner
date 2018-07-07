@@ -1,16 +1,12 @@
 module Filmplanner
   class Cache
-    def initialize(date, theater_ids, movie_ids: nil)
+    def initialize(date, theater_ids)
       @date         = date
       @theater_ids  = theater_ids
-      @movie_ids    = movie_ids
     end
+
     def shows
-      @shows ||= begin
-        shows =Show.where(date: @date, theater_id: @theater_ids).order(:start_at)
-        shows = shows.where(movie_id: @movie_ids) if @movie_ids.present?
-        shows
-      end
+      @shows ||= Show.where(date: @date, theater_id: @theater_ids).order(:start_at)
     end
 
     def movie_ids

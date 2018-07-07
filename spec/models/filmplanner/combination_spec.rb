@@ -37,6 +37,12 @@ module Filmplanner
     describe '#movie_combinations' do
       it 'returns the correct combinations' do
         expect(combination.movie_combinations).to match_array([
+          [movie1.id],
+          [movie2.id],
+          [movie3.id],
+          [movie4.id],
+          [movie5.id],
+          [movie6.id],
           [movie1.id, movie2.id],
           [movie1.id, movie3.id],
           [movie1.id, movie4.id],
@@ -97,10 +103,10 @@ module Filmplanner
       end
     end
 
-    describe '#show_combinations' do
+    describe '#combine_shows' do
       context 'with two movies' do
         it 'returns the cartesian product of movie shows' do
-          expect(combination.show_combinations([movie1.id, movie2.id])).to match_array([
+          expect(combination.combine_shows([movie1.id, movie2.id])).to match_array([
             [show1M1, show1M2],
             [show1M1, show2M2],
             [show1M1, show3M2],
@@ -114,7 +120,7 @@ module Filmplanner
 
       context 'with three movies' do
         it 'returns the cartesian product of movie shows' do
-          expect(combination.show_combinations([movie1.id, movie2.id, movie3.id])).to match_array([
+          expect(combination.combine_shows([movie1.id, movie2.id, movie3.id])).to match_array([
             [show1M1, show1M2, show1M3],
             [show1M1, show1M2, show2M3],
             [show1M1, show1M2, show3M3],
@@ -144,7 +150,7 @@ module Filmplanner
 
       context 'with four movies' do
         it 'returns the cartesian product of movie shows' do
-          expect(combination.show_combinations([movie1.id, movie2.id, movie3.id, movie4.id])).to match_array([
+          expect(combination.combine_shows([movie1.id, movie2.id, movie3.id, movie4.id])).to match_array([
             [show1M1, show1M2, show1M3, show1M4],
             [show1M1, show1M2, show2M3, show1M4],
             [show1M1, show1M2, show3M3, show1M4],
@@ -174,7 +180,7 @@ module Filmplanner
 
       context 'with five movies' do
         it 'returns the cartesian product of movie shows' do
-          expect(combination.show_combinations([movie1.id, movie2.id, movie3.id, movie4.id, movie5.id])).to match_array([
+          expect(combination.combine_shows([movie1.id, movie2.id, movie3.id, movie4.id, movie5.id])).to match_array([
             [show1M1, show1M2, show1M3, show1M4, show1M5],
             [show1M1, show1M2, show2M3, show1M4, show1M5],
             [show1M1, show1M2, show3M3, show1M4, show1M5],
@@ -238,8 +244,7 @@ module Filmplanner
         end
 
         it 'creates the correct suggestions' do
-          expect { combination.combine }.to change { Suggestion.count }.from(0).to(10)
-          expect(Suggestion.all.map(&:key)).to include(
+          expect(combination.combine.map{ |hash| hash[:key] }).to include(
             SuggestionKey.join([show1M1, show1M2].map(&:full_key)),
             SuggestionKey.join([show1M2, show1M3].map(&:full_key)),
             SuggestionKey.join([show1M3, show1M4].map(&:full_key)),
