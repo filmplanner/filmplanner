@@ -1,17 +1,17 @@
 module Filmplanner
   class Combination
     class << self
-      def combine(date, theater_ids)
-        new(date, theater_ids).combine
+      def combine(date, theater_ids, movie_ids: nil)
+        new(date, theater_ids, movies_ids: movie_ids).combine
       end
     end
 
-    def initialize(date, theater_ids)
-      @cache = Cache.new(date, theater_ids)
+    def initialize(date, theater_ids, movie_ids: nil)
+      @cache = Cache.new(date, theater_ids, movie_ids: movie_ids)
     end
 
     def movie_combinations
-      (1..5).flat_map { |i| @cache.movie_ids.combination(i).to_a }
+      (2..5).flat_map { |i| @cache.movie_ids.combination(i).to_a }
     end
 
     def show_combinations(movie_ids)
