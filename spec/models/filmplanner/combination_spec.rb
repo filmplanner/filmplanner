@@ -32,7 +32,7 @@ module Filmplanner
     let!(:show2M6) { FactoryBot.create(:show, theater: theater, movie: movie6, date: Time.zone.local(2018, 7, 7)) }
     let!(:show3M6) { FactoryBot.create(:show, theater: theater, movie: movie6, date: Time.zone.local(2018, 7, 7)) }
 
-    subject(:combination) { Combination.new(date, [theater.id]) }
+    subject(:combination) { Combination.new(date, [theater.id], [movie1, movie2, movie3, movie4, movie5, movie6].map(&:id)) }
 
     describe '#movie_combinations' do
       it 'returns the correct combinations' do
@@ -100,6 +100,36 @@ module Filmplanner
           [movie1.id, movie3.id, movie4.id, movie5.id, movie6.id],
           [movie2.id, movie3.id, movie4.id, movie5.id, movie6.id]
         ])
+      end
+
+      context 'with no movies' do
+        subject(:combination) { Combination.new(date, [theater.id]) }
+
+        it 'returns the correct combinations' do
+          expect(combination.movie_combinations).to match_array([
+            [movie1.id],
+            [movie2.id],
+            [movie3.id],
+            [movie4.id],
+            [movie5.id],
+            [movie6.id]
+          ])
+        end
+      end
+
+      context 'with one movie' do
+        subject(:combination) { Combination.new(date, [theater.id], [movie1.id]) }
+
+        it 'returns the correct combinations' do
+          expect(combination.movie_combinations).to match_array([
+            [movie1.id],
+            [movie1.id, movie2.id],
+            [movie1.id, movie3.id],
+            [movie1.id, movie4.id],
+            [movie1.id, movie5.id],
+            [movie1.id, movie6.id]
+          ])
+        end
       end
     end
 

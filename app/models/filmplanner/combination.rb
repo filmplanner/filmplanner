@@ -2,7 +2,6 @@ module Filmplanner
   class Combination
     MAX_MOVIE_AMOUNT = 5
 
-    # Filmplanner::Combination.combine(date: Time.zone.tomorrow, theater_ids: [13, 5], movie_ids: [22416, 21381, 21743])
     class << self
       def combine(date:, theater_ids:, movie_ids: [])
         new(date, theater_ids, movie_ids).combine
@@ -10,34 +9,28 @@ module Filmplanner
     end
 
     def initialize(date, theater_ids, movie_ids = [])
-      @movie_ids  = movie_ids
       @cache      = Cache.new(date, theater_ids)
+      @movie_ids  = movie_ids
     end
 
     def movie_combinations
-      if @movie_ids.present?
-        combine_movies(@movie_ids) + combine_possible_movies(@movie_ids, @cache.movie_ids)
-      else
-        combine_movies(@cache.movie_ids)
-      end
+      combine_movies(@movie_ids) + combine_suggested_movies(@movie_ids, @cache.movie_ids - @movie_ids)
     end
 
     def combine_movies(movie_ids)
-      (1..[movie_ids.length, MAX_MOVIE_AMOUNT].min).flat_map do |i|
-        movie_ids.combination(i).to_a
-      end
+      length = [movie_ids.length, MAX_MOVIE_AMOUNT].min
+
+      (1..length).flat_map { |i| movie_ids.combination(i).to_a }
     end
 
-    def combine_possible_movies(movie_ids, possible_movie_ids)
-      return [] if movie_ids.length >= 5
-
-      (possible_movie_ids - movie_ids).inject([]) do |combined_movie_ids, movie_id|
-        combined_movie_ids << movie_ids + [movie_id]
-      end
+    def combine_suggested_movies(movie_ids, suggested_movie_ids)
+      suggested_movie_ids.map { |movie_id| movie_ids + [movie_id] }
     end
 
     def combine_shows(movie_ids)
-      (@cache.shows_by_movies(movie_ids).inject(&:product) || []).map { |c| [c].flatten }
+      shows_by_movie = @cache.shows_by_movies(movie_ids)
+
+      shows_by_movie.inject(&:product).map { |combination| [combination].flatten }
     end
 
     def combine
