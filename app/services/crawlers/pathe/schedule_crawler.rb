@@ -2,7 +2,7 @@ module Crawlers
   module Pathe
     class ScheduleCrawler < BaseCrawler
       def path
-        theater_ids = @options[:theater_ids].join(',')
+        theater_ids = @options[:external_theater_ids].join(',')
         date        = @options[:date].strftime('%d-%m-%Y')
 
         "/update-schedule/#{theater_ids}/#{date}"

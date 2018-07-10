@@ -6,7 +6,7 @@ module Crawlers
       describe '#crawl' do
         let(:theater_ids) { [1, 7, 13] }
         let(:date) { Date.new(2018, 7, 7) }
-        subject(:crawler) { ScheduleCrawler.new(theater_ids: theater_ids, date: date) }
+        subject(:crawler) { ScheduleCrawler.new(external_theater_ids: theater_ids, date: date) }
 
         it 'returns the correct hash' do
           VCR.use_cassette 'crawlers/pathe/schedule_response' do
