@@ -8,7 +8,7 @@ module Parsers
           {
             movies: [
               {
-                id:           '21381',
+                external_id:  '21381',
                 title:        'Jurassic World: Fallen Kingdom',
                 description:  'Welkom in Jurassic World: Fallen Kingdom! Favoriete personages keren terug in dit 3D actie-spektakel.',
                 image:        'https://media.pathe.nl/nocropthumb/180x254/gfx_content/posterhr/Jurassic-World_-Fallen-Kingdom_ps_1.jpg',

@@ -7,7 +7,7 @@ module Crawlers
         subject(:crawler) { TheaterPathCrawler.new }
 
         it 'returns the correct hash' do
-          VCR.use_cassette 'crawlers/theater_path_response' do
+          VCR.use_cassette 'crawlers/pathe/theater_path_response' do
             expect(crawler.crawl).to include(
               paths: include(
                 '/bioscoop/amersfoort',

@@ -23,7 +23,7 @@ module Crawlers
 
         movies.map do |movie|
           {
-            id:           movie.find('.schedule__figure a', 'data-gtmclick'),
+            external_id:  movie.find('.schedule__figure a', 'data-gtmclick'),
             title:        movie.find('.schedule__figure a', 'title'),
             description:  movie.find('.schedule__synopsis'),
             image:        movie.find('.schedule__figure img', 'src'),

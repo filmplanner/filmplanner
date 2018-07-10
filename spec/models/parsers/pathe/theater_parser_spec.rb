@@ -14,7 +14,7 @@ module Parsers
       describe '#parse' do
         let(:hash) do
           {
-            id: '23',
+            external_id: '23',
             name: 'Pathé Amersfoort',
             city: 'Amersfoort',
             image: 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg',
@@ -27,7 +27,7 @@ module Parsers
           expect { parser.parse }.to change { Theater.count }.from(0).to(1)
 
           theater = Theater.first
-          expect(theater.id).to eq 23
+          expect(theater.external_id).to eq 23
           expect(theater.name).to eq 'Pathé Amersfoort'
           expect(theater.city).to eq 'Amersfoort'
           expect(theater.image).to eq 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg'
@@ -36,13 +36,13 @@ module Parsers
         end
 
         context 'when record already exists' do
-          let!(:theater) { FactoryBot.create(:theater, id: 23, chain: 'pathe', name: 'troofsremA') }
+          let!(:theater) { FactoryBot.create(:theater, external_id: 23, chain: 'pathe', name: 'troofsremA') }
 
           it 'updates the record' do
             expect { parser.parse }.to_not change { Theater.count }
 
             theater = Theater.first
-            expect(theater.id).to eq 23
+            expect(theater.external_id).to eq 23
             expect(theater.name).to eq 'Pathé Amersfoort'
             expect(theater.city).to eq 'Amersfoort'
             expect(theater.image).to eq 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg'

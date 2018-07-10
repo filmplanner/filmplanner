@@ -6,7 +6,7 @@ module Pathe
     include Sidekiq::Worker
 
     def perform
-      theater_ids     = Theater.all.pluck(:id)
+      theater_ids     = Theater.pathe.pluck(:id)
       remaining_days  = Pathe::Schedule.remaining_days
 
       (0..remaining_days).each do |i|

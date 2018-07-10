@@ -7,8 +7,8 @@ module Parsers
 
       def initialize_by
         {
-          id:     @hash[:id],
-          chain:  Theater::PATHE
+          external_id: @hash[:external_id],
+          chain:       Chain::PATHE
         }
       end
     end

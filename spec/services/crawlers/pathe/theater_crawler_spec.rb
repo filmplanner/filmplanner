@@ -7,9 +7,9 @@ module Crawlers
         subject(:crawler) { TheaterCrawler.new(path: '/bioscoop/amersfoort') }
 
         it 'returns the correct hash' do
-          VCR.use_cassette 'crawlers/theater_response' do
+          VCR.use_cassette 'crawlers/pathe/theater_response' do
             expect(crawler.crawl).to eq(
-              id: '23',
+              external_id: '23',
               name: 'Pathé Amersfoort',
               city: 'Amersfoort',
               image: 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg',

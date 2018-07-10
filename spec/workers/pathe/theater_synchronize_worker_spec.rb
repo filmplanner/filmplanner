@@ -10,7 +10,7 @@ module Pathe
       subject(:worker) { TheaterSynchronizeWorker.new }
 
       it 'creates the correct records' do
-        VCR.use_cassette 'crawlers/theater_response' do
+        VCR.use_cassette 'crawlers/pathe/theater_response' do
           expect { worker.perform }.to change { Theater.count }.from(0).to(1)
         end
       end
