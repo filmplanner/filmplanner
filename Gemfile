@@ -33,6 +33,10 @@ gem 'redis', '~> 4.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
+# Added
 gem 'nokogiri'
 gem 'httparty'
 gem 'sidekiq'
@@ -40,11 +44,10 @@ gem 'sidekiq-scheduler'
 gem 'coveralls', require: false
 gem 'webpacker'
 gem 'react-rails'
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem "bulma-rails", "~> 0.7.1"
 
 group :development, :test do
+  # Added
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.7'
   gem 'vcr'
@@ -59,6 +62,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Added
   gem 'guard'
   gem 'guard-rspec', require: false
 end
