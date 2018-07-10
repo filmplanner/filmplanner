@@ -5,15 +5,15 @@ class Show < ApplicationRecord
   belongs_to :theater
 
   class << self
-    def wait_time_for(shows)
+    def wait_time(shows)
       shows.sort_by(&:start_at).each_cons(2).sum do |show, other|
-        show.wait_time(other) / 60
+        show.wait_time(other)
       end
     end
 
     def attainable?(shows)
-      shows.sort_by(&:start_at).each_cons(2).none? do |show, other|
-        !show.ends_before?(other) || show.wait_time(other) > (shows.length * 30.minutes)
+      shows.sort_by(&:start_at).each_cons(2).all? do |show, other|
+        show.ends_before?(other)
       end
     end
   end

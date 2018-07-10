@@ -38,7 +38,7 @@ RSpec.describe Suggestion do
         date:             Time.zone.local(2018, 7, 7),
         start_at:         Time.zone.local(2018, 7, 7, 10, 0, 0),
         end_at:           Time.zone.local(2018, 7, 7, 14, 20, 0),
-        wait_time:        15.0,
+        wait_time:        15 * 60,
         shows_amount:     2,
         theaters_amount:  1
       )

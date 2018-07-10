@@ -10,7 +10,7 @@ RSpec.describe Show do
     end
   end
 
-  describe '.wait_time_for' do
+  describe '.wait_time' do
     let(:show1) do
       FactoryBot.create(
         :show,
@@ -34,12 +34,12 @@ RSpec.describe Show do
     end
 
     it 'calculates the time between shows' do
-      expect(Show.wait_time_for([show1, show2, show3])).to eq 15 + 9
+      expect(Show.wait_time([show1, show2, show3])).to eq((15 + 9) * 60)
     end
 
     context 'when only one show' do
       it 'returns zero' do
-        expect(Show.wait_time_for([show1])).to eq 0
+        expect(Show.wait_time([show1])).to eq 0
       end
     end
   end
@@ -72,14 +72,6 @@ RSpec.describe Show do
     context 'when show ends during next show' do
       before do
         show2.start_at = Time.zone.local(2018, 7, 7, 12, 14, 0)
-      end
-
-      it { expect(Show.attainable?([show1, show2, show3])).to eq false }
-    end
-
-    context 'when wait time exceeds limit' do
-      before do
-        show3.start_at = Time.zone.local(2018, 7, 7, 16, 21, 0)
       end
 
       it { expect(Show.attainable?([show1, show2, show3])).to eq false }

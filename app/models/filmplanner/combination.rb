@@ -38,11 +38,15 @@ module Filmplanner
         show_combinations = combine_shows(movie_ids)
 
         show_combinations.each do |shows|
-          suggestions << Suggestion.for_shows(shows) if Show.attainable?(shows)
+          suggestions << Suggestion.for_shows(shows) if combination_valid?(shows)
         end
 
         suggestions
       end
+    end
+
+    def combination_valid?(shows)
+      Show.attainable?(shows) && Show.wait_time(shows) < (shows.length * 30.minutes)
     end
   end
 end

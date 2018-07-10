@@ -11,7 +11,7 @@ class Suggestion < ApplicationRecord
         date:             shows.first.date,
         start_at:         shows.first.start_at,
         end_at:           shows.last.end_at,
-        wait_time:        Show.wait_time_for(shows),
+        wait_time:        Show.wait_time(shows),
         shows_amount:     shows.length,
         theaters_amount:  shows.map(&:theater_id).uniq.length
       }
