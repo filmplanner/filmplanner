@@ -1,4 +1,4 @@
-class SuggestionKey
+class Key
   class << self
     def join(keys)
       keys.uniq.sort.join('-')
@@ -22,12 +22,12 @@ class SuggestionKey
   end
 
   def keys
-    SuggestionKey.split(@key)
+    Key.split(@key)
   end
 
   def all_keys
     (1..keys.length).flat_map do |i|
-      keys.combination(i).map { |combination| SuggestionKey.join(combination) }
+      keys.combination(i).map { |combination| Key.join(combination) }
     end
   end
 

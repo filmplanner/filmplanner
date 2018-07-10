@@ -2,7 +2,7 @@ module Keyable
   extend ActiveSupport::Concern
 
   included do
-    scope :for_key, ->(key) { where(id: SuggestionKey.new(key).ids) }
+    scope :by_key, ->(key) { where(id: Key.new(key).ids) }
   end
 
   class_methods do

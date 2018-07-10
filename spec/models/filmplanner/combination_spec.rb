@@ -275,16 +275,16 @@ module Filmplanner
 
         it 'creates the correct suggestions' do
           expect(combination.combine.map{ |hash| hash[:key] }).to include(
-            SuggestionKey.join([show1M1, show1M2].map(&:full_key)),
-            SuggestionKey.join([show1M2, show1M3].map(&:full_key)),
-            SuggestionKey.join([show1M3, show1M4].map(&:full_key)),
-            SuggestionKey.join([show1M4, show1M5].map(&:full_key)),
-            SuggestionKey.join([show1M1, show1M2, show1M3].map(&:full_key)),
-            SuggestionKey.join([show1M2, show1M3, show1M4].map(&:full_key)),
-            SuggestionKey.join([show1M3, show1M4, show1M5].map(&:full_key)),
-            SuggestionKey.join([show1M1, show1M2, show1M3, show1M4].map(&:full_key)),
-            SuggestionKey.join([show1M2, show1M3, show1M4, show1M5].map(&:full_key)),
-            SuggestionKey.join([show1M1, show1M2, show1M3, show1M4, show1M5].map(&:full_key))
+            Key.join([show1M1, show1M2].map(&:full_key)),
+            Key.join([show1M2, show1M3].map(&:full_key)),
+            Key.join([show1M3, show1M4].map(&:full_key)),
+            Key.join([show1M4, show1M5].map(&:full_key)),
+            Key.join([show1M1, show1M2, show1M3].map(&:full_key)),
+            Key.join([show1M2, show1M3, show1M4].map(&:full_key)),
+            Key.join([show1M3, show1M4, show1M5].map(&:full_key)),
+            Key.join([show1M1, show1M2, show1M3, show1M4].map(&:full_key)),
+            Key.join([show1M2, show1M3, show1M4, show1M5].map(&:full_key)),
+            Key.join([show1M1, show1M2, show1M3, show1M4, show1M5].map(&:full_key))
           )
         end
       end
