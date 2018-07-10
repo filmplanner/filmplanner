@@ -5,11 +5,11 @@
   - default
   - low
 :schedule:
-  sync_theaters:
+  pathe_sync_theaters:
     cron: '0 0 * * 0'
-    class: TheaterSynchronizeWorker
+    class: Pathe::TheaterSynchronizeWorker
     description: 'Synchronize all theaters of Pathe.nl to our own database'
-  sync_schedule:
+  pathe_sync_schedule:
     cron: '0 0 * * 2'
-    class: ScheduleSynchronizeWorker
+    class: Pathe::ScheduleSynchronizeWorker
     description: 'Synchronize movies and shows of all Pathe.nl theaters to our own database'

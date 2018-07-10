@@ -1,6 +1,6 @@
 module Crawlers
   module Pathe
-    class ScheduleCrawler < ApplicationCrawler
+    class ScheduleCrawler < BaseCrawler
       def path
         theater_ids = @options[:theater_ids].join(',')
         date        = @options[:date].strftime('%d-%m-%Y')

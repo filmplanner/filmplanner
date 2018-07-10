@@ -1,6 +1,6 @@
 module Crawlers
   module Pathe
-    class TheaterCrawler < ApplicationCrawler
+    class TheaterCrawler < BaseCrawler
       def path
         @options[:path]
       end

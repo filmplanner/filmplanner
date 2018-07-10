@@ -1,6 +1,6 @@
 module Crawlers
   module Pathe
-    class TheaterPathCrawler < ApplicationCrawler
+    class TheaterPathCrawler < BaseCrawler
       def path
         '/'
       end

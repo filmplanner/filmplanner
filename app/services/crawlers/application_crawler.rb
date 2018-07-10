@@ -1,5 +1,7 @@
 module Crawlers
   class ApplicationCrawler
+    CRAWL_TIMEOUT = 3
+
     class << self
       def before(method, options)
         old_method = instance_method(method)
@@ -18,7 +20,7 @@ module Crawlers
       @options = options
     end
 
-    def crawl
+    def base_url
       raise NotImplementedError
     end
 
@@ -26,17 +28,17 @@ module Crawlers
       raise NotImplementedError
     end
 
+    def crawl
+      raise NotImplementedError
+    end
+
     private
 
     def timeout
-      timout = ENV.fetch('CRAWLER_TIMEOUT').to_i
-
-      sleep(timout) unless Rails.env.test?
+      sleep(CRAWL_TIMEOUT) unless Rails.env.test?
     end
 
     def request
-      base_url = ENV.fetch('CRAWLER_BASE_URL')
-
       HTTParty.get(base_url + path)
     end
 
