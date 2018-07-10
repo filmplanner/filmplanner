@@ -32,10 +32,11 @@ module Parsers
           expect(theater.city).to eq 'Amersfoort'
           expect(theater.image).to eq 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg'
           expect(theater.url).to eq '/bioscoop/amersfoort'
+          expect(theater.chain).to eq 'pathe'
         end
 
         context 'when record already exists' do
-          let!(:theater) { FactoryBot.create(:theater, id: 23, name: 'troofsremA') }
+          let!(:theater) { FactoryBot.create(:theater, id: 23, chain: 'pathe', name: 'troofsremA') }
 
           it 'updates the record' do
             expect { parser.parse }.to_not change { Theater.count }
@@ -46,6 +47,7 @@ module Parsers
             expect(theater.city).to eq 'Amersfoort'
             expect(theater.image).to eq 'https://media.pathe.nl/gfx_content/bioscoop/wallpaper/pathe.nl_1600x590px_amersfoort.jpg'
             expect(theater.url).to eq '/bioscoop/amersfoort'
+            expect(theater.chain).to eq 'pathe'
           end
         end
       end
