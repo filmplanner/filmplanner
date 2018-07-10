@@ -7,7 +7,7 @@ RSpec.describe ScheduleSynchronizeWorker do
     subject(:worker) { ScheduleSynchronizeWorker.new }
 
     it 'creates the correct records' do
-      expect(Crawlers::ScheduleCrawler).to receive(:crawl).at_least(:once) do
+      expect(Crawlers::Pathe::ScheduleCrawler).to receive(:crawl).at_least(:once) do
         {
           movies: [
             {

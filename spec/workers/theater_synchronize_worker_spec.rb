@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TheaterSynchronizeWorker do
   describe '#perform' do
     before do
-      expect(Crawlers::TheaterPathCrawler).to receive(:crawl) { { paths: ['/bioscoop/amersfoort'] } }
+      expect(Crawlers::Pathe::TheaterPathCrawler).to receive(:crawl) { { paths: ['/bioscoop/amersfoort'] } }
     end
 
     subject(:worker) { TheaterSynchronizeWorker.new }

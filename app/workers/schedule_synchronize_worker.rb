@@ -10,7 +10,7 @@ class ScheduleSynchronizeWorker
 
     (0..remaining_days).each do |i|
       date          = Time.zone.today + i.days
-      schedule_hash = Crawlers::ScheduleCrawler.crawl(theater_ids: theater_ids, date: date)
+      schedule_hash = Crawlers::Pathe::ScheduleCrawler.crawl(theater_ids: theater_ids, date: date)
 
       Parsers::ScheduleParser.parse(schedule_hash)
     end
