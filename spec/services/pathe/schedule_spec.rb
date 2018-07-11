@@ -40,6 +40,13 @@ module Pathe
             expect(Schedule.update_end).to eq Date.new(2018, 7, 11)
           end
         end
+
+        describe '.dates' do
+          it 'returns the correct dates' do
+            expect(Schedule.dates.size).to eq remaining_days + 1
+            expect(Schedule.dates.first).to eq today
+          end
+        end
       end
     end
   end

@@ -32,6 +32,12 @@ module Pathe
         ((update_end - today).days / 1.day).to_i
       end
 
+      def dates
+        (0..remaining_days).map do |i|
+          today + i.days
+        end
+      end
+
       def weekday(date)
         # Algoritm needs to see Sunday as 7th weekday,
         # otherwise it won't calculate the right dates.

@@ -7,10 +7,9 @@ module Pathe
 
     def perform
       external_theater_ids  = Theater.pathe.pluck(:external_id)
-      remaining_days        = Pathe::Schedule.remaining_days
+      dates                 = Pathe::Schedule.dates
 
-      (0..remaining_days).each do |i|
-        date          = Time.zone.today + i.days
+      dates.each do |date|
         schedule_hash = Crawlers::Pathe::ScheduleCrawler.crawl(external_theater_ids: external_theater_ids, date: date)
 
         Parsers::Pathe::ScheduleParser.parse(schedule_hash)
