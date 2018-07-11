@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :dates,       only: :index
     resources :movies,      only: :index
-    resources :shows,       only: :index
     resources :suggestions, only: :index
     resources :theaters,    only: :index
   end

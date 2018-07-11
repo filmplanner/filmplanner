@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'mobx-react'
 
-import MovieSelectorApp from 'components/MovieSelectorApp'
 import MovieSelectorStore from 'stores/MovieSelectorStore'
+import MovieSelectorApp from 'components/MovieSelectorApp'
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('movie-selector-app')
