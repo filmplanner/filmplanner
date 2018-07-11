@@ -1,5 +1,7 @@
 import { observable, action, computed } from 'mobx'
 
+import { url } from 'lib/url'
+
 class MovieSelectorStore {
   @observable dates;
   @observable theaters;
@@ -34,11 +36,7 @@ class MovieSelectorStore {
 
   @computed
   get suggestionParams() {
-    if(this.selectedMovieIds) {
-      return { theater_ids: this.selectedTheaterIds, date: this.selectedDate, movie_ids: this.selectedMovieIds }
-    } else {
-      return { theater_ids: this.selectedTheaterIds, date: this.selectedDate }
-    }
+    return { theater_ids: this.selectedTheaterIds, date: this.selectedDate, movie_ids: this.selectedMovieIds }
   }
 
   @action
@@ -59,7 +57,7 @@ class MovieSelectorStore {
 
   @action
   loadMovieData() {
-    fetch(this.url('/api/movies', this.movieParams))
+    fetch(url('/api/movies', this.movieParams))
       .then(response => response.json())
       .then(data => this.setMovieData(data))
       .catch(error => console.error("Couldn't fetch movies", error))
@@ -67,18 +65,10 @@ class MovieSelectorStore {
 
   @action
   loadSuggestionData() {
-    fetch(this.url('/api/suggestions', this.suggestionParams))
+    fetch(url('/api/suggestions', this.suggestionParams))
       .then(response => response.json())
       .then(data => this.setSuggestionData(data))
       .catch(error => console.error("Couldn't fetch suggestions", error))
-  }
-
-  @action
-  url(path, params) {
-    const esc = encodeURIComponent;
-    const query = Object.keys(params).map(k => esc(k) + '=' + esc(params[k])).join('&');
-
-    return path + '?' + query
   }
 
   @action
