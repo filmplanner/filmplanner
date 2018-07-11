@@ -29,16 +29,6 @@ class MovieSelectorStore {
     this.selectedTheaterIds   = [12];
   }
 
-  @computed
-  get movieParams() {
-    return { theater_ids: this.selectedTheaterIds, date: this.selectedDate }
-  }
-
-  @computed
-  get suggestionParams() {
-    return { theater_ids: this.selectedTheaterIds, date: this.selectedDate, movie_ids: this.selectedMovieIds }
-  }
-
   @action
   loadDateData() {
     fetch('/api/dates')
@@ -57,7 +47,7 @@ class MovieSelectorStore {
 
   @action
   loadMovieData() {
-    fetch(url('/api/movies', this.movieParams))
+    fetch(url('/api/movies', { theater_ids: this.selectedTheaterIds, date: this.selectedDate }))
       .then(response => response.json())
       .then(data => this.setMovieData(data))
       .catch(error => console.error("Couldn't fetch movies", error))
@@ -65,7 +55,7 @@ class MovieSelectorStore {
 
   @action
   loadSuggestionData() {
-    fetch(url('/api/suggestions', this.suggestionParams))
+    fetch(url('/api/suggestions', { theater_ids: this.selectedTheaterIds, date: this.selectedDate, movie_ids: this.selectedMovieIds }))
       .then(response => response.json())
       .then(data => this.setSuggestionData(data))
       .catch(error => console.error("Couldn't fetch suggestions", error))
