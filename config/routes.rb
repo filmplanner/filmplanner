@@ -1,14 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root to: "home#index"
+  root to: proc { [404, {}, ["Not found."]] }
 
-  namespace :api do
-    resources :dates,       only: :index
-    resources :movies,      only: :index
-    resources :suggestions, only: :index
-    resources :theaters,    only: :index
-  end
+  resources :dates,       only: :index
+  resources :movies,      only: :index
+  resources :suggestions, only: :index
+  resources :theaters,    only: :index
 
   mount Sidekiq::Web => '/sidekiq'
 end
