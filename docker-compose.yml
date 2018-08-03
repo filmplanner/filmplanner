@@ -1,7 +1,7 @@
 version: '2'
 services:
   db:
-    image: postgres
+    image: postgres:9.6
     volumes:
       - data:/var/lib/postgresql/data
   redis:
