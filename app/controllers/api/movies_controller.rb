@@ -1,6 +1,8 @@
 module Api
   class MoviesController < ApplicationController
     def index
+      shows = Show.includes(:movie).where(date: date, theater_id: theater_ids)
+
       render json: {
         movies: shows.map(&:movie).uniq,
         shows:  shows
@@ -9,8 +11,12 @@ module Api
 
     private
 
-    def shows
-      Show.includes(:movie).where(date: params[:date], theater_id: params[:theater_ids])
+    def date
+      params[:date]
+    end
+
+    def theater_ids
+      param_to_array(params[:theater_ids])
     end
   end
 end

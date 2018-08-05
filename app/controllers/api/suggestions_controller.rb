@@ -15,11 +15,11 @@ module Api
     end
 
     def theater_ids
-      Array(params[:theater_ids]).map(&:to_i)
+      param_to_array(params[:theater_ids])
     end
 
     def movie_ids
-      Array(params[:movie_ids]).map(&:to_i)
+      param_to_array(params[:movie_ids])
     end
   end
 end
