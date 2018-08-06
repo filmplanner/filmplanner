@@ -1,5 +1,5 @@
 module Api
-  class DatesController < ApplicationController
+  class DaysController < ApplicationController
     def index
       render json: Pathe::Schedule.dates
     end

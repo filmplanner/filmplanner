@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: proc { [404, {}, ["Not found."]] }
 
   namespace :api do
-    resources :dates,       only: :index
+    resources :days,        only: :index
     resources :movies,      only: :index
     resources :suggestions, only: :index
     resources :theaters,    only: :index
